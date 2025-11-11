@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Hello Express!</title>
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/table.css" />
+    <link rel="stylesheet" href="/css/details.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root{
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+        html,body{height:100%;margin:0}
+        h1{margin:0 0 8px 0;font-size:26px;letter-spacing:-0.3px}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><%= title %></h1>
+        <p><%= content %></p>
+    </div>
+    <div class="details-container">
+        <div class="detail-item">
+            <div class="detail-label">Name</div>
+            <div class="detail-value"><%= contact.name %></div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label">Email</div>
+            <div class="detail-value"><%= contact.email %></div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label">Phone</div>
+            <div class="detail-value"><%= contact.phone %></div>
+        </div>
+    </div>
+
+    <div class="back-button-container">
+        <a href="/contacts" class="back-button">
+            <i class="fa-solid fa-arrow-left"></i> Back to Contacts
+        </a>
+    </div>
+</body>
+</html>
