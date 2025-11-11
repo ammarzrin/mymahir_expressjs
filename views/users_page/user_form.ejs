@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Hello Express!</title>
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/form.css" />
+    <link rel="stylesheet" href="/css/details.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root{
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+        html,body{height:100%;margin:0}
+        h1{margin:0 0 8px 0;font-size:26px;letter-spacing:-0.3px}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><%= title %></h1>
+        <p><%= content %></p>
+    </div>
+
+    <div class="form-container">
+        <% if (error) { %>
+            <div class="error"><%= error %></div>
+        <% } %>
+        <form action="<%= formAction %>" method="POST">
+            <% if(user) { %>
+                <input type="hidden" name="_method" value="PUT" />
+            <% } %>
+            
+            <label for="name">Name: </label>
+            <input type="text" id="name" name="name" placeholder="Enter name" value="<%= user ? user.name : '' %>"/>
+
+            <label for="email">Email: </label>
+            <input type="text" id="email" name="email" placeholder="Enter email address" value="<%= user ? user.email : '' %>"/>
+            
+            <label for="phone">Phone No: </label>
+            <input type="text" id="phone" name="phone" placeholder="Enter phone number" value="<%= user ? user.phone : '' %>"/>
+
+            <div class="button-group">
+                <button type="submit" class="save-btn">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    <%= user ? 'Update' : 'Save' %>
+                </button>
+                <a href="/users" class="back-button">
+                <i class="fa-solid fa-arrow-left"></i> Back to Users
+                </a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -11,11 +11,15 @@ app.set('view engine', 'ejs');
 // Set views directory
 app.set('views', path.join(__dirname, 'views'));
 
+// MIDDLEWARES
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Method Override Middleware for supporting PUT and DELETE methods in forms
+const methodOverride = require('method-override');
+app.use(methodOverride('_method'));
+
 // ROUTINGS
-// GET requests
 app.get('/', (req, res) => {
   res.send('Hello Express!');
 });
@@ -56,5 +60,8 @@ app.use('/blogs', blogRoutes);
 
 const contactRoutes = require('./routes/contact_routes');
 app.use('/contacts', contactRoutes);
+
+const usersRoutes = require('./routes/users_routes');
+app.use('/users', usersRoutes);
 
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

@@ -41,9 +41,19 @@ router.get('/add', (req, res) => renderFormPage(res));
 // Creating router to handle form submission for adding a new contact.
 router.post('/add', (req, res) => {
     const { name, email, phone } = req.body;
-    if (!name || !email || !phone) {
-        return renderFormPage(res, 'All fields are required.');
+    
+    // Validating the form inputs.
+    if (!name || name.trim() === '') {
+        return renderFormPage(res, 'Name cannot be empty.');
     }
+    if (!phone || !/^\d+$/.test(phone)) {
+        return renderFormPage(res, 'Phone number must contain only digits.');
+    }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        return renderFormPage(res, 'Invalid email format.');
+    }
+
+    // Creating a new contact and adding it to the contacts array.
     const newContact = {
         id: contacts.length + 1,
         name,
@@ -51,6 +61,16 @@ router.post('/add', (req, res) => {
         phone
     };
     contacts.push(newContact);
+    res.redirect('/contacts');
+});
+
+router.delete('/delete/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    const contactIndex = contacts.findIndex(c => c.id === id);
+    if (contactIndex < 0) {
+        return res.status(404).send('Contact not found');
+    }
+    contacts.splice(contactIndex, 1);
     res.redirect('/contacts');
 });
 
