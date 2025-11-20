@@ -2,6 +2,18 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
+const cors = require('cors');
+
+const corsOptions = {
+  origin: ['http://localhost:3000', 'http://localhost/', 'http://10.0.2.2/', 'http://127.0.0.1/'],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  allowedHeaaders: ['Content-Type', 'Authorization'],
+  optionsSuccessStatus: 204
+};
+app.use(cors(corsOptions)); // Enable CORS with specified options
+
+// STATIC FILES
 app.use(express.static('public'));
 
 // VIEW ENGINE SETUP
